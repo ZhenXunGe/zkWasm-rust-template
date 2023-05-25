@@ -64,7 +64,7 @@ impl TxInfo {
 }
 
 #[wasm_bindgen]
-pub fn test() {
+pub fn zkmain() {
     Merkle::new();
     let verify_info = VerifyInfo::read();
     let tx_info = TxInfo::read();

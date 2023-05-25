@@ -152,7 +152,7 @@ dependencies = [
 [[package]]
 name = "zkwasm-rust-sdk"
 version = "0.1.0"
-source = "git+https://github.com/DelphinusLab/zkWasm-rust.git#42592d894cabc7698f7f56b039f64aafa50539e7"
+source = "git+https://github.com/DelphinusLab/zkWasm-rust.git#4825a878f79b3d7749bd0d3a97de3adc6d63549e"
 dependencies = [
  "rlp",
  "wasm-bindgen",
