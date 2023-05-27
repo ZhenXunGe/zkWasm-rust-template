@@ -2,10 +2,15 @@ use wasm_bindgen::prelude::*;
 use zkwasm_rust_sdk::{
     wasm_input,
     Merkle,
+    require,
 };
 
-pub fn get_account(account: &[u64;4]) -> [u64; 4] {
-    Merkle::get(account[0])
+pub fn get_account(account: u32) -> [u64; 4] {
+    Merkle::get(account as u64)
+}
+
+pub fn set_account(account: u32, data:&[u64; 4]) {
+    Merkle::set(account as u64, data)
 }
 
 struct VerifyInfo {
@@ -48,8 +53,8 @@ impl TxInfo {
     fn read() -> Self {
         TxInfo {
             data: [
-                unsafe {wasm_input(0)},
-                unsafe {wasm_input(0)},
+                unsafe {wasm_input(0)}, // opcode and id
+                unsafe {wasm_input(0)}, // id:[u32; 2]
                 unsafe {wasm_input(0)},
                 unsafe {wasm_input(0)},
                 unsafe {wasm_input(0)},
@@ -65,18 +70,26 @@ impl TxInfo {
 
 #[wasm_bindgen]
 pub fn zkmain() {
-    Merkle::new();
     let verify_info = VerifyInfo::read();
+    Merkle::load(&verify_info.oldroot);
     let tx_info = TxInfo::read();
-    /*
-    let address = [
-        unsafe {wasm_input(1)},
-        unsafe {wasm_input(1)},
-        unsafe {wasm_input(1)},
-        unsafe {wasm_input(1)},
-    ];
-    let account_info = get_account(&address);
-    */
+    let opcode = tx_info.data[0] >> 56;
+    if opcode == 0 {
+        let address_index = (tx_info.data[1] >> 32) as u32;
+        let mut account_info = get_account(address_index);
+        let amount = tx_info.data[2].to_be();
+        account_info[0] += amount; 
+        set_account(address_index, &account_info);
+    }
+    if opcode == 1 {
+        let address_index = (tx_info.data[1] >> 32) as u32;
+        let mut account_info = get_account(address_index);
+        let amount = tx_info.data[2].to_be();
+        unsafe {require((amount <= account_info[0]) as i32)};
+        account_info[0] -= amount; 
+        set_account(address_index, &account_info);
+    }
+
 
     // Check hash of tx_info == verify_info.hash
     //
