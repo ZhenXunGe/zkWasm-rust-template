@@ -1,0 +1,22 @@
+[package]
+name = "zkwasm-secp256k1-test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "zkwasm_secp256k1_test"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+secp256k1 = "*"
+zkwasm-rust-sdk = { git = "https://github.com/DelphinusLab/zkWasm-rust.git", features=["witness"] }
+wasm-bindgen = "0.2.83"
+
+# `wasm-opt` is on by default in for the release profile, but it can be
+# disabled by setting it to `false`
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+rustflags = ["-C", "link-arg=--shared"]
