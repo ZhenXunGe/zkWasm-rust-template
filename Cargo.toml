@@ -1,5 +1,5 @@
 [workspace]
-members = ["rlp", "keccak", "secp256k1"]
+members = ["rlp", "keccak", "secp256k1", "field"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
