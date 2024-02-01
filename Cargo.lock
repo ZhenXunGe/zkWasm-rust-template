@@ -446,6 +446,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "zkwasm-phantom-test"
+version = "0.1.0"
+dependencies = [
+ "rlp",
+ "wasm-bindgen",
+ "zkwasm-rust-sdk",
+]
+
+[[package]]
 name = "zkwasm-rlp-test"
 version = "0.1.0"
 dependencies = [
