@@ -7,6 +7,6 @@ rm -rf output
 mkdir output
 
 # Single test
-RUST_LOG=info ~/zkWasm/target/release/delphinus-cli  -k 18 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm setup
-RUST_LOG=info ~/zkWasm/target/release/delphinus-cli  -k 18 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm single-prove 
-RUST_LOG=info ~/zkWasm/target/release/delphinus-cli  -k 18 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm single-verify
+RUST_LOG=info ~/zkWasm/target/debug/delphinus-cli --host standard -k 19 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm setup
+RUST_LOG=info ~/zkWasm/target/debug/delphinus-cli --host standard -k 19 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm single-prove
+RUST_LOG=info ~/zkWasm/target/debug/delphinus-cli --host standard -k 19 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm single-verify
