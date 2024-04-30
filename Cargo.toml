@@ -1,14 +1,15 @@
 [workspace]
-members = ["rlp", "keccak", "secp256k1", "field", "phantom"]
+members = ["rlp", "keccak", "secp256k1", "field", "phantom", "contract"]
 resolver = "2"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
 rlp = { version = "0.5.2", default-features = false }
-zkwasm-rust-sdk = { git = "https://github.com/DelphinusLab/zkWasm-rust.git" }
+zkwasm-rust-sdk = { git = "https://github.com/DelphinusLab/zkWasm-rust.git", features=["witness"] }
+derive_builder = { git = "https://github.com/DelphinusLab/zkWasm-rust.git" }
 wasm-bindgen = "0.2.83"
 
-[patch."https://github.com/DelphinusLab/zkWasm-rust.git"]
-zkwasm-rust-sdk = { path = "/home/xgao/zkWasm-rust/", features=["default"]}
+#[patch."https://github.com/DelphinusLab/zkWasm-rust.git"]
+#zkwasm-rust-sdk = { path = "/home/xgao/zkWasm-rust/", features=["witness"]}
 

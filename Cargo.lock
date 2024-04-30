@@ -99,6 +99,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "derive_builder"
+version = "0.1.0"
+source = "git+https://github.com/DelphinusLab/zkWasm-rust.git#ce5b89d1c3ac9c3fd76ef481bd9bc5dcdccc9cb0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "digest"
 version = "0.10.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -427,6 +437,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "zkwasm-contract-test"
+version = "0.1.0"
+dependencies = [
+ "derive_builder",
+ "wasm-bindgen",
+ "zkwasm-rust-sdk",
+]
+
+[[package]]
 name = "zkwasm-field-test"
 version = "0.1.0"
 dependencies = [
@@ -466,7 +485,9 @@ dependencies = [
 [[package]]
 name = "zkwasm-rust-sdk"
 version = "0.1.0"
+source = "git+https://github.com/DelphinusLab/zkWasm-rust.git#ce5b89d1c3ac9c3fd76ef481bd9bc5dcdccc9cb0"
 dependencies = [
+ "derive_builder",
  "primitive-types",
  "wasm-bindgen",
 ]

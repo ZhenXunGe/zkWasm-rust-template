@@ -1,7 +1,6 @@
 use wasm_bindgen::prelude::*;
 use zkwasm_rust_sdk::{
     wasm_input,
-    require,
     Merkle,
 };
 
@@ -12,8 +11,8 @@ mod phantom {
 use zkwasm_rust_sdk::Merkle;
 use zkwasm_rust_sdk::wasm_dbg;
 use wasm_bindgen::prelude::*;
-use zkwasm_rust_sdk::witness::start_alloc_witness;
-use zkwasm_rust_sdk::witness::stop_alloc_witness;
+use zkwasm_rust_sdk::allocator::start_alloc_witness;
+use zkwasm_rust_sdk::allocator::stop_alloc_witness;
 use crate::root;
 #[inline(never)]
 #[wasm_bindgen]
@@ -52,10 +51,10 @@ pub fn zkmain() {
     let mut merkle = Merkle::new();
     merkle.set(0, &[1, 1, 2, 2], false, None);
     let mut leaf = [0, 0, 0, 0];
+    let _ = unsafe { root };
     unsafe {
         root = merkle.root.clone();
     }
-    let len = phantom::pp2(a);
-    let g = merkle.get(0, &mut leaf, &mut [0; 4], false);
-    //phantom::pp2();
+    let _ = phantom::pp2(a);
+    let _ = merkle.get(0, &mut leaf, &mut [0; 4], false);
 }
