@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 use zkwasm_rust_sdk::allocator::alloc_witness_memory;
 use zkwasm_rust_sdk::{
@@ -5,21 +6,21 @@ use zkwasm_rust_sdk::{
     require,
 };
 use derive_builder::WitnessObj;
-use zkwasm_rust_sdk::witness::{load_witness_obj, WitnessObjWriter};
+use zkwasm_rust_sdk::witness::{load_witness_obj, prepare_witness_obj, WitnessObjWriter};
 use zkwasm_rust_sdk::witness::WitnessObjReader;
 
-#[derive(WitnessObj, PartialEq, Clone, Debug)]
+#[derive(Serialize, Deserialize, WitnessObj, PartialEq, Clone, Debug)]
 struct A {
     x: u64
 }
 
 
-#[derive(WitnessObj, PartialEq, Clone, Debug)]
+#[derive(Serialize, Deserialize, WitnessObj, PartialEq, Clone, Debug)]
 struct B {
     x: u64
 }
 
-#[derive(WitnessObj, PartialEq, Clone, Debug)]
+#[derive(Serialize, Deserialize, WitnessObj, PartialEq, Clone, Debug)]
 enum Command {
     S(A),
     R(B)
@@ -42,4 +43,16 @@ pub fn zkmain() {
     for tx in unsafe { &*calldata } {
         handle_tx(tx);
     }
+}
+
+#[wasm_bindgen]
+pub fn produce_inputs(json_str: String) {
+    let mut commands = vec![];
+    prepare_witness_obj(
+        &mut |x| commands.push(x),
+        |json_str| {
+            serde_json::from_str::<Vec<Command>>(json_str).unwrap()
+        },
+        &json_str
+    )
 }
