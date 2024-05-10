@@ -31,16 +31,15 @@ use crate::root;
         unsafe {wasm_dbg(1044)};
 
         let merkle = unsafe {Merkle::load(root.clone())};
-        let mut leaf = [0, 0, 0, 0];
         //return test;
-        let len = merkle.get(0, &mut leaf, &mut [0; 4], false);
+        let (_, leaf) = merkle.get(0, false);
         if a>0 {
             return pp2(a-1);
         }
         unsafe {
             stop_alloc_witness();
         }
-        return len
+        return leaf.len() as u64
     }
 }
 
@@ -50,11 +49,10 @@ pub fn zkmain() {
     let a = unsafe { wasm_input(0) };
     let mut merkle = Merkle::new();
     merkle.set(0, &[1, 1, 2, 2], false, None);
-    let mut leaf = [0, 0, 0, 0];
     let _ = unsafe { root };
     unsafe {
         root = merkle.root.clone();
     }
     let _ = phantom::pp2(a);
-    let _ = merkle.get(0, &mut leaf, &mut [0; 4], false);
+    let _ = merkle.get(0, false);
 }

@@ -109,7 +109,7 @@ impl WithdrawInfo {
 
 #[wasm_bindgen]
 pub fn zkmain() {
-    let mut merkle = unsafe {
+    let merkle = unsafe {
         Merkle::load([
             wasm_input(1),
             wasm_input(1),
@@ -125,12 +125,11 @@ pub fn zkmain() {
             wasm_input(0)
         ]
     };
-    let mut data_buf = [0; 16];
-    /*
     let mut kvpair = KeyValueMap::new(merkle);
-    let len = kvpair.get(&user_address, &mut data_buf);
-    */
-    let root = merkle.root;
+
+    let user_data = kvpair.get(&user_address);
+
+    let root = kvpair.merkle.root;
     unsafe {
             wasm_output(root[0]);
             wasm_output(root[1]);
