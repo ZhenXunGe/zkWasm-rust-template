@@ -1,7 +1,4 @@
 use serde::{Deserialize, Serialize};
-use wasm_bindgen::prelude::*;
-use zkwasm_rust_sdk::allocator::alloc_witness_memory;
-use zkwasm_rust_sdk::kvpair::KeyValueMap;
 use zkwasm_rust_sdk::{
     wasm_input,
     wasm_output, Merkle,
@@ -107,42 +104,5 @@ impl WithdrawInfo {
     }
 }
 
-#[wasm_bindgen]
-pub fn zkmain() {
-    let merkle = unsafe {
-        Merkle::load([
-            wasm_input(1),
-            wasm_input(1),
-            wasm_input(1),
-            wasm_input(1),
-        ])
-    };
-    let user_address = unsafe {
-        [
-            wasm_input(0),
-            wasm_input(0),
-            wasm_input(0),
-            wasm_input(0)
-        ]
-    };
-    let mut kvpair = KeyValueMap::new(merkle);
-
-    let user_data = kvpair.get(&user_address);
-
-    let root = kvpair.merkle.root;
-    unsafe {
-            wasm_output(root[0]);
-            wasm_output(root[1]);
-            wasm_output(root[2]);
-            wasm_output(root[3]);
-    }
-
-    let deposit = DepositInfo::new(
-        0,
-        0,
-        0,
-        [1000, 0, 0, 0],
-        [0; 32]
-    );
-    output_tx_info(&deposit.to_be_bytes());
-}
+#[cfg(feature = "local")]
+mod test;

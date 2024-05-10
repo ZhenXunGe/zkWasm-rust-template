@@ -23,3 +23,7 @@ serde_json = "1.0"
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = false
 rustflags = ["-C", "link-arg=--shared"]
+
+[features]
+default = ["local"]
+local = []
