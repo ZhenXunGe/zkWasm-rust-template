@@ -6,6 +6,7 @@ use zkwasm_rust_sdk::{
 };
 use crate::DepositInfo;
 use crate::output_tx_info;
+use crate::process_inputs;
 
 struct State {
     balance: u64
@@ -21,14 +22,9 @@ pub fn zkmain() {
             wasm_input(1),
         ])
     };
-    let user_address = unsafe {
-        [
-            wasm_input(0),
-            wasm_input(0),
-            wasm_input(0),
-            wasm_input(0)
-        ]
-    };
+    let mut inputs = vec![];
+    let user_address = process_inputs(&mut |x| {inputs.push(x)});
+    let balance = inputs[0];
 
     let mut kvpair = KeyValueMap::new(merkle);
 
@@ -45,7 +41,7 @@ pub fn zkmain() {
         }
     };
 
-    state.balance += 1000; // charge
+    state.balance += balance; // charge
     
     kvpair.set(&user_address, &[state.balance]);
 
@@ -61,7 +57,7 @@ pub fn zkmain() {
         0,
         0,
         0,
-        [1000, 0, 0, 0],
+        [balance, 0, 0, 0],
         [0; 32]
     );
 
