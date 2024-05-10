@@ -101,6 +101,16 @@ dependencies = [
 [[package]]
 name = "derive_builder"
 version = "0.1.0"
+source = "git+https://github.com/DelphinusLab/zkWasm-rust.git?branch=unbounded-kvpair#4d2b4a3dd6a7dc48cac10a1b7ba815b1264385fd"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "derive_builder"
+version = "0.1.0"
 source = "git+https://github.com/DelphinusLab/zkWasm-rust.git#ce5b89d1c3ac9c3fd76ef481bd9bc5dcdccc9cb0"
 dependencies = [
  "proc-macro2",
@@ -483,11 +493,11 @@ dependencies = [
 name = "zkwasm-contract-test"
 version = "0.1.0"
 dependencies = [
- "derive_builder",
+ "derive_builder 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git)",
  "serde",
  "serde_json",
  "wasm-bindgen",
- "zkwasm-rust-sdk",
+ "zkwasm-rust-sdk 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git?branch=unbounded-kvpair)",
 ]
 
 [[package]]
@@ -497,7 +507,7 @@ dependencies = [
  "ff",
  "primitive-types",
  "wasm-bindgen",
- "zkwasm-rust-sdk",
+ "zkwasm-rust-sdk 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git)",
 ]
 
 [[package]]
@@ -506,7 +516,7 @@ version = "0.1.0"
 dependencies = [
  "sha2",
  "wasm-bindgen",
- "zkwasm-rust-sdk",
+ "zkwasm-rust-sdk 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git)",
 ]
 
 [[package]]
@@ -515,7 +525,7 @@ version = "0.1.0"
 dependencies = [
  "rlp",
  "wasm-bindgen",
- "zkwasm-rust-sdk",
+ "zkwasm-rust-sdk 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git?branch=unbounded-kvpair)",
 ]
 
 [[package]]
@@ -524,7 +534,17 @@ version = "0.1.0"
 dependencies = [
  "rlp",
  "wasm-bindgen",
- "zkwasm-rust-sdk",
+ "zkwasm-rust-sdk 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git)",
+]
+
+[[package]]
+name = "zkwasm-rust-sdk"
+version = "0.1.0"
+source = "git+https://github.com/DelphinusLab/zkWasm-rust.git?branch=unbounded-kvpair#4d2b4a3dd6a7dc48cac10a1b7ba815b1264385fd"
+dependencies = [
+ "derive_builder 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git?branch=unbounded-kvpair)",
+ "primitive-types",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -532,7 +552,7 @@ name = "zkwasm-rust-sdk"
 version = "0.1.0"
 source = "git+https://github.com/DelphinusLab/zkWasm-rust.git#ce5b89d1c3ac9c3fd76ef481bd9bc5dcdccc9cb0"
 dependencies = [
- "derive_builder",
+ "derive_builder 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git)",
  "primitive-types",
  "wasm-bindgen",
 ]
@@ -543,17 +563,17 @@ version = "0.1.0"
 dependencies = [
  "secp256k1",
  "wasm-bindgen",
- "zkwasm-rust-sdk",
+ "zkwasm-rust-sdk 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git)",
 ]
 
 [[package]]
 name = "zkwasm-settlement-test"
 version = "0.1.0"
 dependencies = [
- "derive_builder",
+ "derive_builder 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git)",
  "serde",
  "serde_json",
  "sha2",
  "wasm-bindgen",
- "zkwasm-rust-sdk",
+ "zkwasm-rust-sdk 0.1.0 (git+https://github.com/DelphinusLab/zkWasm-rust.git?branch=unbounded-kvpair)",
 ]
