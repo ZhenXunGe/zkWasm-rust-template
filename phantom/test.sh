@@ -6,7 +6,12 @@ set -x
 rm -rf output
 mkdir output
 
+K=19
+Path=~/zkWasm-rust-template/phantom
+Features="--features cuda"
+
 # Single test
-RUST_LOG=info ~/zkWasm/target/debug/delphinus-cli --host standard -k 19 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm setup
-RUST_LOG=info ~/zkWasm/target/debug/delphinus-cli --host standard -k 19 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm single-prove
-RUST_LOG=info ~/zkWasm/target/debug/delphinus-cli --host standard -k 19 --function zkmain --param params --output ./output --wasm ./pkg/output.wasm single-verify
+cd ~/zkWasm
+RUST_LOG=info cargo run --release $Features -- --params params testwasm setup --host standard -k $K --wasm $Path/pkg/output.wasm
+RUST_LOG=info cargo run --release $Features -- --params params testwasm prove --wasm $Path/pkg/output.wasm --output $Path/output --ctxout ctxout --private 1:i64
+RUST_LOG=info cargo run --release $Features -- --params params testwasm verify --output $Path/output

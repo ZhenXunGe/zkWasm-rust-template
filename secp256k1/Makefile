@@ -3,4 +3,4 @@ build:
 	wasm-opt -O3 -o pkg/output.wasm pkg/image.wasm
 
 clean:
-	rm -rf pkg
+	rm -rf pkg output params
