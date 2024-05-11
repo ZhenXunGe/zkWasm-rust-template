@@ -8,12 +8,13 @@ mkdir output
 
 K=22
 Path=~/zkWasm-rust-template/keccak
+Features="--features continuation,cuda"
 
 # Single test
 # Generate continuation proof
 cd ~/zkWasm
-RUST_LOG=info cargo run --release --features continuation,cuda -- --params $Path/params testwasm setup -k $K
-RUST_LOG=info cargo run --release --features continuation,cuda -- --params $Path/params testwasm prove --wasm $Path/pkg/output.wasm --output $Path/output --ctxout ctxout
+RUST_LOG=info cargo run --release $Features -- --params $Path/params testwasm setup -k $K
+RUST_LOG=info cargo run --release $Features -- --params $Path/params testwasm prove --wasm $Path/pkg/output.wasm --output $Path/output --ctxout ctxout
 
 # todo
 #cd ~/continuation-batcher
