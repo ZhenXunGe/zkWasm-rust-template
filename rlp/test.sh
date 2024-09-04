@@ -6,12 +6,13 @@ set -x
 rm -rf output
 mkdir output
 
-K=18
-Path=~/zkWasm-rust-template/rlp
-Features="--features cuda"
+ZKWASM_DIR="/home/xgao/zkWasm";
+ZKWASM_CLI=$ZKWASM_DIR/target/release/zkwasm-cli
+ZKWASM_PARAMS=$ZKWASM_DIR/params
 
-# Single test
-cd ~/zkWasm
-RUST_LOG=info cargo run --release $Features -- --params params testwasm setup -k $K --wasm $Path/pkg/output.wasm
-RUST_LOG=info cargo run --release $Features -- --params params testwasm prove --wasm $Path/pkg/output.wasm --output $Path/output --ctxout ctxout
-RUST_LOG=info cargo run --release $Features -- --params params testwasm verify --output $Path/output
+$ZKWASM_CLI --params $ZKWASM_PARAMS flp setup
+$ZKWASM_CLI --params $ZKWASM_PARAMS flp dry-run --wasm ./pkg/output.wasm --output ./output
+$ZKWASM_CLI --params $ZKWASM_PARAMS flp prove --wasm ./pkg/output.wasm --output ./output
+$ZKWASM_CLI --params $ZKWASM_PARAMS flp verify --wasm ./pkg/output.wasm --output ./output
+
+#RUST_LOG=info cargo run --release $Features -- --params params testwasm prove --wasm $Path/pkg/output.wasm --output $Path/output --ctxout ctxout
