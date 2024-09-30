@@ -13,6 +13,6 @@ ZKWASM_PARAMS=$ZKWASM_DIR/params
 $ZKWASM_CLI --params $ZKWASM_PARAMS flp setup
 $ZKWASM_CLI --params $ZKWASM_PARAMS flp dry-run --wasm ./pkg/output.wasm --output ./output
 $ZKWASM_CLI --params $ZKWASM_PARAMS flp prove --wasm ./pkg/output.wasm --output ./output
-$ZKWASM_CLI --params $ZKWASM_PARAMS flp verify --wasm ./pkg/output.wasm --output ./output
+$ZKWASM_CLI --params $ZKWASM_PARAMS flp verify --output ./output
 
 #RUST_LOG=info cargo run --release $Features -- --params params testwasm prove --wasm $Path/pkg/output.wasm --output $Path/output --ctxout ctxout

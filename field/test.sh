@@ -6,14 +6,14 @@ set -x
 rm -rf output
 mkdir output
 
-ZKWASM_DIR="/home/xgao/zkWasm";
+ZKWASM_DIR="/home/xgao/debug/zkWasm";
 ZKWASM_CLI=$ZKWASM_DIR/target/release/zkwasm-cli
 ZKWASM_PARAMS=$ZKWASM_DIR/params
 
-$ZKWASM_CLI --params $ZKWASM_PARAMS field setup
+$ZKWASM_CLI --params $ZKWASM_PARAMS field setup --host standard
 $ZKWASM_CLI --params $ZKWASM_PARAMS field dry-run --wasm ./pkg/output.wasm --output ./output
 $ZKWASM_CLI --params $ZKWASM_PARAMS field prove --wasm ./pkg/output.wasm --output ./output
-$ZKWASM_CLI --params $ZKWASM_PARAMS field verify --wasm ./pkg/output.wasm --output ./output
+$ZKWASM_CLI --params $ZKWASM_PARAMS field verify --output ./output
 
 # TODO: FIX BATCH
 #cd ~/continuation-batcher
