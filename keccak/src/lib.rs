@@ -5,7 +5,7 @@ use sha2::{Sha256, Digest};
 pub fn zkmain() {
     let mut hasher = Sha256::new();
     let mut data = vec![];
-    for i in 0..100000u32 {
+    for i in 0..20000u32 {
         data.push((i & 0xff) as u8);
     }
     hasher.update(&data);
